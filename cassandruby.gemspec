@@ -5,5 +5,5 @@ Gem::Specification.new do |s|
   s.summary             = 'ORM wrapper for Cassandra'
   s.authors             = ["Sidharth Shanker"]
   s.email               = "sid@gumroad.com"
-  s.files               = ["lib/*"]
+  s.files               = ["lib/cassandruby.rb"]
 end
