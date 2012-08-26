@@ -6,4 +6,7 @@ Gem::Specification.new do |s|
   s.authors             = ["Sidharth Shanker"]
   s.email               = "sid@gumroad.com"
   s.files               = ["lib/cassandruby.rb"]
+
+  s.files               = Dir.glob("lib/**/*")
+  s.require_path        = 'lib'
 end
