@@ -1,7 +1,8 @@
-class Cassandruby
-  @@version = "0.0.1"
+require './column_family'
+require './config.rb'
 
-  def self.version
-    puts @@version 
+module Cassandruby
+  def configure
+    yield Config 
   end
 end
