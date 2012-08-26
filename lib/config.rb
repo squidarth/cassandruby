@@ -1,5 +1,11 @@
+require 'pry'
+
 module Cassandruby
   module Config
+    extend self
+    
+    binding.pry
+
     def keyspace=(keyspace)
       @keyspace = keyspace 
     end

@@ -1,5 +1,5 @@
-require 'cassandruby/column_family'
-require 'cassandruby/config'
+require 'column_family'
+require 'config'
 
 module Cassandruby
   extend self
