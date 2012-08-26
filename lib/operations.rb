@@ -1,18 +1,15 @@
 module Cassandruby
   module Operations
     def insert(family, key, hash)
-      puts "inserting #{hash} into #{key} in #{family}"
+      self.client.insert(family, key, hash) 
     end
 
     def remove(family, key)
-      puts "removing #{key} from #{family}"
-
+      self.client.remove(family, key)
     end
   
     def get(family, key)
-      puts "getting #{key} from #{family}"
-
-
+      self.client.get(family, key)
     end 
   end
 end
