@@ -29,10 +29,22 @@ module Cassandruby
     def self.included(base)
       base.extend(ColumnFamilyClassMethods)
     end 
-  
+
+    unless respond_to? :id= 
+      def id=(id)
+        instance_variable_set(:@id, id)  
+      end 
+    end 
+   
+    unless respond_to? :id 
+      def id
+        instance_variable_get(:@id)
+      end 
+    end
+
     def save
       #case object has already been saved 
-      self.id ||= Cassandruby.generate_id 
+      self.id ||= Cassandruby.generate_id(family)
       Cassandruby.insert(self.class.family, self.id, self.to_hash)
     end 
  

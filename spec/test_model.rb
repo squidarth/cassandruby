@@ -15,4 +15,6 @@ class TestModel
 end
 
 model = TestModel.new
+model.name = "John"
+model.save
 binding.pry
