@@ -1,3 +1,5 @@
+require 'utils'
+
 module Cassandruby
   module ColumnFamily
     module ColumnFamilyClassMethods
@@ -44,7 +46,7 @@ module Cassandruby
 
     def save
       #case object has already been saved 
-      self.id ||= Cassandruby.generate_id(family)
+      self.id ||= Cassandruby.generate_id(self.class.family)
       Cassandruby.insert(self.class.family, self.id, self.to_hash)
     end 
  
@@ -55,7 +57,7 @@ module Cassandruby
     
     def to_hash
       hash = {}
-      self.instance_variables.each {|var| hash[var] = self.instance_variable_get("@#{var.to_s}".to_sym)}
+      self.instance_variables.each {|var| hash[var] = self.instance_variable_get("#{var.to_s}".to_sym)}
       hash 
     end 
   end
