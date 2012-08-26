@@ -12,9 +12,7 @@ class TestModel
 
   field :name
   binding.pry
-  def initialize
-    @name = "Test Model"
-  end
 end
 
-TestModel.new.name
+model = TestModel.new
+binding.pry

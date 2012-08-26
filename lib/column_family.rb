@@ -1,6 +1,20 @@
 module Cassandruby
   module ColumnFamily
     module ColumnFamilyClassMethods
+      def family
+        self.to_s.to_sym 
+      end 
+      
+      def find(key)
+        resp = Cassandruby.get(self.to_s.to_sym, key)
+        obj = self.new 
+        return nil if resp.empty? 
+        resp.each do |k,v|
+          obj.instance_variable_set(":@#{k}", v)      
+        end 
+        obj 
+      end 
+      
       def field(name, options = {})
         define_method name.to_sym do
           instance_variable_get(":@#{name}")
@@ -15,9 +29,22 @@ module Cassandruby
     def self.included(base)
       base.extend(ColumnFamilyClassMethods)
     end 
+  
+    def save
+      #case object has already been saved 
+      self.id ||= Cassandruby.generate_id 
+      Cassandruby.insert(self.class.family, self.id, self.to_hash)
+    end 
+ 
+    def destroy
+      raise Exception unless self.id.present?
+      Cassandruby.remove(self.class.family, self.id)
+    end 
     
-    def name
-      puts @name
-    end    
+    def to_hash
+      hash = {}
+      self.instance_variables.each {|var| hash[var] = self.instance_variable_get(":@#{var.to_s}")}
+      hash 
+    end 
   end
 end
