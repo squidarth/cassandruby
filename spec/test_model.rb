@@ -11,10 +11,11 @@ class TestModel
   include Cassandruby::ColumnFamily
 
   field :name
-  binding.pry
 end
 
 model = TestModel.new
+binding.pry
 model.name = "John"
+binding.pry
 model.save
 binding.pry
